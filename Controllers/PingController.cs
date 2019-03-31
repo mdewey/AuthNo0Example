@@ -17,7 +17,7 @@ namespace content.Controllers
     [Authorize]
     public async Task<ActionResult> Pong()
     {
-      return Ok(User.Claims);
+      return Ok(new { User.Claims, User.Identity.Name });
     }
   }
 }
