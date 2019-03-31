@@ -59,8 +59,7 @@ namespace content.Controllers
       this.db.Users.Add(user);
       await this.db.SaveChangesAsync();
 
-      return new { user, alreadyExists };
-      // return authService.GetAuthData(user);
+      return authService.GetAuthData(user);
     }
 
   }
