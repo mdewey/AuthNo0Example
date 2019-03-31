@@ -10,6 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using AuthNo0Example.Services;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace content
 {
@@ -45,6 +48,22 @@ namespace content
       });
 
 
+      services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                     .AddJwtBearer(options =>
+                     {
+                       options.TokenValidationParameters = new TokenValidationParameters
+                       {
+                         ValidateIssuer = false,
+                         ValidateAudience = false,
+                         ValidateLifetime = true,
+                         ValidateIssuerSigningKey = true,
+
+                         IssuerSigningKey = new SymmetricSecurityKey(
+                          Encoding.UTF8.GetBytes("bRhYJRlZvBj2vW4MrV5HVdPgIE6VMtCFB0kTtJ1m")
+                      )
+                       };
+                     });
+
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
        .AddJsonOptions(options =>
       {
@@ -75,8 +94,11 @@ namespace content
       {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
       });
+
+      app.UseAuthentication();
       app.UseStaticFiles();
       app.UseSpaStaticFiles();
+
       app.UseMvc(routes =>
       {
         routes.MapRoute(

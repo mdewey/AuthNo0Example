@@ -38,9 +38,7 @@ namespace content.Controllers
       {
         return BadRequest(new { password = "invalid password" });
       }
-
-      return new { passwordValid, user };
-      // return authService.GetAuthData(user);
+      return authService.GetAuthData(user);
     }
 
     [HttpPost("register")]
