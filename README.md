@@ -7,3 +7,7 @@
 - [ ] add full name, sate created, updated, last login to user model
 - [ ] hook up react front end with welcome message
 - [ ] add a domain model with FK to the user table for example
+
+## Stretch goals
+
+- [ ] Add middleware to attach user object to the request?
