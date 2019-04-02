@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace AuthNo0Example.Models
@@ -10,5 +11,12 @@ namespace AuthNo0Example.Models
 
     [Required]
     public string Password { get; set; }
+
+    public string FullName { get; set; }
+
+    public DateTime? DateCreated { get; set; } = DateTime.Now;
+
+    public DateTime LastLoggedIn { get; set; } = DateTime.Now;
+
   }
 }

@@ -38,6 +38,8 @@ namespace content.Controllers
       {
         return BadRequest(new { password = "invalid password" });
       }
+      user.LastLoggedIn = DateTime.Now;
+      await this.db.SaveChangesAsync();
       return authService.GetAuthData(user);
     }
 
@@ -52,6 +54,7 @@ namespace content.Controllers
       var user = new User
       {
         UserName = model.UserName,
+        FullName = model.FullName
       };
       user.Password = authService.HashPassword(user, model);
       this.db.Users.Add(user);
