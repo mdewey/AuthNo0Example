@@ -14,10 +14,20 @@ namespace content.Controllers
   [Route("api/[controller]")]
   public class PingController : ControllerBase
   {
+    public IUserService userService { get; }
+
+    public PingController(IUserService userService)
+    {
+      this.userService = userService;
+    }
+
+
     [Authorize]
     public async Task<ActionResult> Pong()
     {
-      return Ok(new { User.Claims, User.Identity.Name });
+      var currentUser = await this.userService.GetUserFromDatabase(User);
+
+      return Ok(new { User.Claims, User.Identity.Name, currentUser });
     }
   }
 }

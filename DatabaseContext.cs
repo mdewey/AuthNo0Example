@@ -29,7 +29,7 @@ namespace content
       if (!optionsBuilder.IsConfigured)
       {
         var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
-        var conn = "server=localhost;database=UserExample;User Id=postgres; password=admin";
+        var conn = "server=localhost;database=UserExample;";
         if (envConn != null)
         {
           conn = ConvertPostConnectionToConnectionString(envConn);

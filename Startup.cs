@@ -33,6 +33,7 @@ namespace content
 
 
       services.AddSingleton<IAuthService>(new AuthService());
+      services.AddTransient<IUserService, UserService>();
       services.AddDbContext<DatabaseContext>();
       services.AddHealthChecks();
       // Register the Swagger generator, defining 1 or more Swagger documents
