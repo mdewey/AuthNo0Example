@@ -3,10 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using AuthNo0Example.Models;
 using AuthNo0Example.Services;
+using AuthNo0Example.Services.Settings;
 using AuthNo0Example.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace content.Controllers
 {
@@ -15,10 +17,18 @@ namespace content.Controllers
   public class PingController : ControllerBase
   {
     public IUserService userService { get; }
+    public IOptions<AuthSettings> authSettings { get; }
 
-    public PingController(IUserService userService)
+    public PingController(IUserService userService, IOptions<AuthSettings> authSettings)
     {
       this.userService = userService;
+      this.authSettings = authSettings;
+    }
+
+    [HttpGet("settings")]
+    public ActionResult Settingstest()
+    {
+      return Ok(this.authSettings.Value);
     }
 
 

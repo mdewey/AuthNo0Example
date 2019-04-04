@@ -13,6 +13,7 @@ using AuthNo0Example.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using AuthNo0Example.Services.Settings;
 
 namespace content
 {
@@ -31,10 +32,13 @@ namespace content
     public void ConfigureServices(IServiceCollection services)
     {
 
-
-      services.AddSingleton<IAuthService>(new AuthService());
+      var authSettings = Configuration.GetSection("Auth");
+      services.Configure<AuthSettings>(authSettings);
+      services.AddTransient<IAuthService, AuthService>();
       services.AddTransient<IUserService, UserService>();
       services.AddDbContext<DatabaseContext>();
+
+
       services.AddHealthChecks();
       // Register the Swagger generator, defining 1 or more Swagger documents
       services.AddSwaggerGen(c =>

@@ -3,8 +3,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AuthNo0Example.Models;
+using AuthNo0Example.Services.Settings;
 using AuthNo0Example.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AuthNo0Example.Services
@@ -12,8 +14,14 @@ namespace AuthNo0Example.Services
   public class AuthService : IAuthService
   {
 
-    private double jwtLifespan = 2592000;
-    private string jwtSecret = "bRhYJRlZvBj2vW4MrV5HVdPgIE6VMtCFB0kTtJ1m";
+    private double jwtLifespan;
+    private string jwtSecret;
+
+    public AuthService(IOptions<AuthSettings> settings)
+    {
+      this.jwtLifespan = settings.Value.JwtLifespan;
+      this.jwtSecret = settings.Value.JwtToken;
+    }
 
     public AuthData GetAuthData(User user)
     {
