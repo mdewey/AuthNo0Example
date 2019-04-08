@@ -22,7 +22,7 @@ namespace content.Controllers
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<Object>> Post([FromBody]LoginViewModel model)
+    public async Task<ActionResult<AuthData>> Post([FromBody]LoginViewModel model)
     {
       if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -44,7 +44,7 @@ namespace content.Controllers
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<object>> Post([FromBody]SignUp model)
+    public async Task<ActionResult<AuthData>> Post([FromBody]SignUp model)
     {
       if (!ModelState.IsValid) return BadRequest(ModelState);
 

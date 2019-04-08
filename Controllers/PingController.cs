@@ -25,15 +25,10 @@ namespace content.Controllers
       this.authSettings = authSettings;
     }
 
-    [HttpGet("settings")]
-    public ActionResult Settingstest()
-    {
-      return Ok(this.authSettings.Value);
-    }
-
 
     [Authorize]
-    public async Task<ActionResult> Pong()
+    [HttpGet]
+    public async Task<ActionResult<object>> Pong()
     {
       var currentUser = await this.userService.GetUserFromDatabase(User);
 
