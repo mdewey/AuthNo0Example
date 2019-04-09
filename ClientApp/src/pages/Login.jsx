@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Auth from '../Auth'
 
 class SignUp extends Component {
   state = {}
@@ -19,8 +20,7 @@ class SignUp extends Component {
       .then(resp => {
         console.log({ resp })
         if (resp.data.token) {
-          localStorage.setItem('auth-data', JSON.stringify(resp.data))
-          this.props.history.push('/')
+          new Auth(this.props.history).setSession(resp.data)
         } else {
           this.setState({
             message: 'Try again'

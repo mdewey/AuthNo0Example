@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import axios from 'axios'
 
+import Auth from '../Auth'
+
 class SignUp extends Component {
   handleChange = e => {
     this.setState({
@@ -18,9 +20,7 @@ class SignUp extends Component {
         password: this.state.password
       })
       .then(resp => {
-        console.log({ resp })
-        localStorage.setItem('auth-data', JSON.stringify(resp.data))
-        this.props.history.push('/')
+        new Auth(this.props.history).setSession(resp.data)
       })
   }
   render() {

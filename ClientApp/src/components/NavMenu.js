@@ -11,6 +11,8 @@ import {
 import { Link } from 'react-router-dom'
 import './NavMenu.css'
 
+import Auth from '../Auth'
+
 export class NavMenu extends Component {
   static displayName = NavMenu.name
 
@@ -27,6 +29,24 @@ export class NavMenu extends Component {
     this.setState({
       collapsed: !this.state.collapsed
     })
+  }
+
+  getAuthMenu = () => {
+    return (
+      <>
+        <NavItem>
+          <NavLink tag={Link} className="text-dark" to="/signup">
+            Sign Up
+          </NavLink>
+        </NavItem>
+
+        <NavItem>
+          <NavLink tag={Link} className="text-dark" to="/login">
+            Log in
+          </NavLink>
+        </NavItem>
+      </>
+    )
   }
 
   render() {
@@ -52,16 +72,7 @@ export class NavMenu extends Component {
                     Home
                   </NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/signup">
-                    Sign Up
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/login">
-                    Log in
-                  </NavLink>
-                </NavItem>
+                {this.getAuthMenu()}
               </ul>
             </Collapse>
           </Container>
