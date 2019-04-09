@@ -13,7 +13,6 @@ export default class Auth {
     localStorage.setItem('expires_at', expiresAt)
     window.location.href = '/'
   }
-  // not tested
 
   logout() {
     // Clear Access Token and ID Token from local storage
@@ -22,6 +21,7 @@ export default class Auth {
     // navigate to the home route
     window.location.href = '/'
   }
+  // not tested
 
   handleAuthentication(callback) {}
 

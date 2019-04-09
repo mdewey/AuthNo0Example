@@ -31,9 +31,6 @@ export class NavMenu extends Component {
     })
   }
 
-  componentWillReceiveProps(p, n) {
-    console.log({ p, n })
-  }
   getAuthMenu = () => {
     if (new Auth().isAuthenticated()) {
       return (
