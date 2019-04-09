@@ -31,22 +31,36 @@ export class NavMenu extends Component {
     })
   }
 
+  componentWillReceiveProps(p, n) {
+    console.log({ p, n })
+  }
   getAuthMenu = () => {
-    return (
-      <>
-        <NavItem>
-          <NavLink tag={Link} className="text-dark" to="/signup">
-            Sign Up
-          </NavLink>
-        </NavItem>
-
-        <NavItem>
-          <NavLink tag={Link} className="text-dark" to="/login">
-            Log in
-          </NavLink>
-        </NavItem>
-      </>
-    )
+    if (new Auth().isAuthenticated()) {
+      return (
+        <>
+          <NavItem>
+            <NavLink tag={Link} className="text-dark" to="/logout">
+              Log out
+            </NavLink>
+          </NavItem>
+        </>
+      )
+    } else {
+      return (
+        <>
+          <NavItem>
+            <NavLink tag={Link} className="text-dark" to="/signup">
+              Sign Up
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={Link} className="text-dark" to="/login">
+              Log in
+            </NavLink>
+          </NavItem>
+        </>
+      )
+    }
   }
 
   render() {

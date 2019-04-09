@@ -1,6 +1,6 @@
 export default class Auth {
-  constructor(history) {
-    this.history = history
+  constructor() {
+    // this.history = history
   }
   // tested
 
@@ -11,15 +11,16 @@ export default class Auth {
     )
     localStorage.setItem('token', JSON.stringify(authResult))
     localStorage.setItem('expires_at', expiresAt)
-    this.history.push('/')
+    window.location.href = '/'
   }
   // not tested
 
   logout() {
     // Clear Access Token and ID Token from local storage
     localStorage.removeItem('token')
+    localStorage.removeItem('expires_at')
     // navigate to the home route
-    this.history.push('/')
+    window.location.href = '/'
   }
 
   handleAuthentication(callback) {}
