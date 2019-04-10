@@ -6,7 +6,7 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <h1>Welcome to the birds</h1>
+        <h1>Welcome to the Foobars</h1>
         <img src="https://placebear.com/200/300" />
       </div>
     )

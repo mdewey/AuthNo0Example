@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 import './NavMenu.css'
 
 import Auth from '../Auth'
-
+const auth = new Auth()
 export class NavMenu extends Component {
   static displayName = NavMenu.name
 
@@ -21,7 +21,18 @@ export class NavMenu extends Component {
 
     this.toggleNavbar = this.toggleNavbar.bind(this)
     this.state = {
-      collapsed: true
+      collapsed: true,
+      user: {}
+    }
+  }
+
+  componentDidMount() {
+    if (auth.isAuthenticated()) {
+      auth.getProfile(user => {
+        this.setState({
+          user
+        })
+      })
     }
   }
 
@@ -32,9 +43,12 @@ export class NavMenu extends Component {
   }
 
   getAuthMenu = () => {
-    if (new Auth().isAuthenticated()) {
+    if (auth.isAuthenticated()) {
       return (
         <>
+          <NavLink tag={Link} className="text-dark" to="#">
+            <NavItem>Welcome, {this.state.user.fullName}</NavItem>
+          </NavLink>
           <NavItem>
             <NavLink tag={Link} className="text-dark" to="/logout">
               Log out
@@ -69,7 +83,7 @@ export class NavMenu extends Component {
         >
           <Container>
             <NavbarBrand tag={Link} to="/">
-              SDG Bird Watching!
+              SDG FooBar
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse
@@ -77,14 +91,7 @@ export class NavMenu extends Component {
               isOpen={!this.state.collapsed}
               navbar
             >
-              <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">
-                    Home
-                  </NavLink>
-                </NavItem>
-                {this.getAuthMenu()}
-              </ul>
+              <ul className="navbar-nav flex-grow">{this.getAuthMenu()}</ul>
             </Collapse>
           </Container>
         </Navbar>

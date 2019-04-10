@@ -30,7 +30,7 @@ namespace content.Controllers
     [HttpGet]
     public async Task<ActionResult<object>> Pong()
     {
-      var currentUser = await this.userService.GetUserFromDatabase(User);
+      var currentUser = await this.userService.GetUserFromDatabaseAsync(User);
 
       return Ok(new { User.Claims, User.Identity.Name, currentUser });
     }

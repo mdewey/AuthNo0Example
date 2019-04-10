@@ -1,7 +1,6 @@
+import axios from 'axios'
+
 export default class Auth {
-  constructor() {
-    // this.history = history
-  }
   // tested
 
   setSession(authResult) {
@@ -21,16 +20,13 @@ export default class Auth {
     // navigate to the home route
     window.location.href = '/'
   }
-  // not tested
-
-  handleAuthentication(callback) {}
-
   isAuthenticated() {
     // Check whether the current time is past the
     // Access Token's expiry time
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
     return new Date().getTime() < expiresAt
   }
+  // not tested
 
   getToken() {
     const token = JSON.parse(localStorage.getItem('token'))
@@ -41,7 +37,17 @@ export default class Auth {
   }
 
   //...
-  getProfile(cb) {}
+  getProfile(cb) {
+    axios
+      .get('/api/who', {
+        headers: { Authorization: this.authorizationHeader() }
+      })
+      .then(resp => {
+        if (cb) {
+          cb(resp.data)
+        }
+      })
+  }
 
   authorizationHeader() {
     return `Bearer ${this.getToken()}`

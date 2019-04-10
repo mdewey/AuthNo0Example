@@ -1,14 +1,20 @@
+# powershell
 dotnet publish -c Release 
 
+# powershell
 cp dockerfile ./bin/release/netcoreapp2.2/publish
 
-docker build -t sdg-template-image ./bin/release/netcoreapp2.2/publish
+# docker cli
+docker build -t sdg-foobar-image ./bin/release/netcoreapp2.2/publish
 
-docker tag sdg-template-image registry.heroku.com/heroku-web-app/web
+# docker cli
+docker tag sdg-foobar-image registry.heroku.com/sdg-foobar/web
 
-docker push registry.heroku.com/heroku-web-app/web
+# docker cli
+docker push registry.heroku.com/sdg-foobar/web
 
-heroku container:release web -a heroku-web-app
+# powershell
+heroku container:release web -a sdg-foobar
 
 # sudo chmod 755 deploy.sh
 # ./deploy.sh

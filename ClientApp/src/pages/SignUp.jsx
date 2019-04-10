@@ -26,7 +26,7 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <h1 className="display-4">Sign up to become a birdwatcher!</h1>
+        <h1 className="display-4">Sign up to become a FooBar!</h1>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label for="fullNameExample">Full Name</label>

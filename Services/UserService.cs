@@ -14,7 +14,7 @@ namespace AuthNo0Example.Services
       this.db = db;
     }
 
-    public async Task<User> GetUserFromDatabase(System.Security.Claims.ClaimsPrincipal user)
+    public async Task<User> GetUserFromDatabaseAsync(System.Security.Claims.ClaimsPrincipal user)
     {
       var userName = user?.Identity?.Name;
       var currentUser = await this.db.Users.FirstOrDefaultAsync(f => f.UserName == userName);
