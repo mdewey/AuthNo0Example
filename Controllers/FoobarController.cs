@@ -14,7 +14,7 @@ namespace content.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  //   [Authorize]
+  [Authorize]
   public class FoobarController : ControllerBase
   {
     private IUserService _userService;
@@ -54,7 +54,7 @@ namespace content.Controllers
     public async Task<IActionResult> PutFoobar(int id, Foobar foobar)
     {
       var user = await _userService.GetUserFromDatabaseAsync(User);
-
+      _context.Entry(user).State = EntityState.Deleted;
       if (id != foobar.Id || foobar.UserId != foobar.UserId)
       {
         return BadRequest();
@@ -87,6 +87,7 @@ namespace content.Controllers
     {
       var user = await _userService.GetUserFromDatabaseAsync(User);
       foobar.UserId = user.Id;
+
       _context.Foobars.Add(foobar);
       await _context.SaveChangesAsync();
 

@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { Route } from 'react-router'
 import { Layout } from './components/Layout'
 import { Home } from './components/Home'
-import { FetchData } from './components/FetchData'
-import { Counter } from './components/Counter'
 import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
+import Foobars from './pages/Foobars'
 
 export default class App extends Component {
   static displayName = App.name
@@ -18,6 +17,7 @@ export default class App extends Component {
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
+        <Route path="/foobar" component={Foobars} />
       </Layout>
     )
   }

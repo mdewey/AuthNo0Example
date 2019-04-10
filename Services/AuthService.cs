@@ -49,7 +49,8 @@ namespace AuthNo0Example.Services
       {
         Token = token,
         TokenExpirationTime = ((DateTimeOffset)expirationTime).ToUnixTimeSeconds(),
-        Id = user.Id
+        Id = user.Id,
+        User = new UserViewModel(user)
       };
     }
 

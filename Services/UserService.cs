@@ -18,7 +18,6 @@ namespace AuthNo0Example.Services
     {
       var userName = user?.Identity?.Name;
       var currentUser = await this.db.Users.FirstOrDefaultAsync(f => f.UserName == userName);
-      currentUser.Password = null;
       return currentUser;
     }
   }

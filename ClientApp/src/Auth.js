@@ -10,7 +10,7 @@ export default class Auth {
     )
     localStorage.setItem('token', JSON.stringify(authResult))
     localStorage.setItem('expires_at', expiresAt)
-    window.location.href = '/'
+    window.location.href = '/foobar'
   }
 
   logout() {
