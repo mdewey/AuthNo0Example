@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AuthNo0Example.Models
@@ -17,6 +18,8 @@ namespace AuthNo0Example.Models
     public DateTime? DateCreated { get; set; } = DateTime.Now;
 
     public DateTime LastLoggedIn { get; set; } = DateTime.Now;
+
+    public IList<Foobar> Foobars { get; set; } = new List<Foobar>();
 
   }
 }

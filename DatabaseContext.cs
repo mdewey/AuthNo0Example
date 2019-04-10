@@ -46,5 +46,6 @@ namespace content
     }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Foobar> Foobars { get; set; }
   }
 }
